@@ -268,10 +268,19 @@ const poll = {
       return;
     }
     this.answers[choice]++;
-    console.log(this.answers);
+    displayResults(this.answers);
+    // console.log(this.answers);
   },
 };
 
-document
-  .querySelector('.poll')
-  .addEventListener('click', poll.registerNewAnswer.bind(poll));
+const displayResults = function(type) {
+  if(Array.isArray(type))
+    console.log(`É um array`);
+  if(typeof type === "string")
+    console.log(`É uma string`);
+
+}
+
+// document
+//   .querySelector('.poll')
+//   .addEventListener('click', poll.registerNewAnswer.bind(poll));
