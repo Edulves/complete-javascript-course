@@ -255,32 +255,40 @@ const poll = {
   // This generates [0, 0, 0, 0]. More is the next section 😀
   answers: new Array(4).fill(0),
   registerNewAnswer: function () {
-    const choice = prompt(
-      'What is your favourite programming language?\n0: JavaScript\n1: Python\n2: Rust\n3: C++\n (Write option number)'
+    // Get answer
+    const choice = Number(
+      prompt(
+        `${this.question}\n${this.options.join('\n')}\n(Write option number)`
+      )
     );
-    if (
-      isNaN(Number(choice)) ||
-      choice.trim() == '' ||
-      choice < 0 ||
-      choice > 3
-    ) {
+
+    // Register answer
+    if (isNaN(choice) || choice > this.answers.length - 1 || choice < 0) {
       console.log('Invalid input');
       return;
     }
     this.answers[choice]++;
-    displayResults(this.answers);
-    // console.log(this.answers);
+
+    this.displayResults();
+    this.displayResults('string');
+  },
+  displayResults(type = 'array') {
+    if (type === 'array') {
+      console.log(this.answers);
+    } else if (type === 'string') {
+      // Poll results are 13, 2, 4, 1
+      console.log(`Poll results are ${this.answers.join(', ')}`);
+    }
   },
 };
 
-const displayResults = function(type) {
-  if(Array.isArray(type))
-    console.log(`É um array`);
-  if(typeof type === "string")
-    console.log(`É uma string`);
+document
+  .querySelector('.poll')
+  .addEventListener('click', poll.registerNewAnswer.bind(poll));
 
-}
+poll.displayResults.call({ answers: [5, 2, 3] }, 'string');
+poll.displayResults.call({ answers: [1, 5, 3, 9, 6, 1] }, 'string');
+poll.displayResults.call({ answers: [1, 5, 3, 9, 6, 1] });
 
-// document
-//   .querySelector('.poll')
-//   .addEventListener('click', poll.registerNewAnswer.bind(poll));
+// BONUS TEST DATA 1: [5, 2, 3]
+// BONUS TEST DATA 2: [1, 5, 3, 9, 6, 1]
