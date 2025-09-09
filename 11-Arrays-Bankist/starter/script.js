@@ -92,7 +92,7 @@ displayMovements(account1.movements);
 //   ['GBP', 'Pound sterling'],
 // ]);
 
-// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
 /*
@@ -203,6 +203,7 @@ TEST DATA 2: Julia's data [9, 16, 6, 8, 3], Kate's data [10, 5, 6, 1, 4]
 GOOD LUCK 😀
 */
 
+/*
 const dogsJulia = [3, 5, 2, 12, 7];
 const dogsKate = [4, 1, 15, 8, 3];
 
@@ -216,4 +217,26 @@ const checkDogs = function (arr, arr2) {
 };
 
 checkDogs(dogsJulia, dogsKate);
+*/
 
+
+const eurToUsd = 1.1;
+
+// const movementsUSD = movements.map(function(mov) {
+//   return mov * eurToUsd;
+// })
+
+const movementsUSD = movements.map(mov =>  mov * eurToUsd)
+
+console.log(movements);
+console.log(movementsUSD);
+
+const movementUSDfor = [];
+for(const mov of movements) movementUSDfor.push(mov * eurToUsd);
+console.log(movementUSDfor);
+
+const movementsDescriptons = movements.map((mov, i) => {
+      return `Movement ${i + 1}: You ${mov > 0 ? 'deposited': 'withdrew'} ${Math.abs(mov)}`
+    }
+);
+console.log(movementsDescriptons);
