@@ -79,8 +79,27 @@ const displayMovements = function (movements) {
     containerMovements.insertAdjacentHTML('afterbegin', html);
   });
 };
-
 displayMovements(account1.movements);
+
+const createUsernames = function(accs) {
+  accs.forEach((acc) => {
+    acc.username = acc.owner
+    .toLowerCase()
+    .split(' ')
+    .map(name => name.at(0))
+    .join('');
+  });
+};
+createUsernames(accounts);
+
+for(const nome of accounts){
+  console.log(nome);
+}
+
+
+// accounts.forEach((account) => {
+//   console.log(createUsernames(account.owner)); 
+// })
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -219,7 +238,7 @@ const checkDogs = function (arr, arr2) {
 checkDogs(dogsJulia, dogsKate);
 */
 
-
+/*
 const eurToUsd = 1.1;
 
 // const movementsUSD = movements.map(function(mov) {
@@ -240,3 +259,4 @@ const movementsDescriptons = movements.map((mov, i) => {
     }
 );
 console.log(movementsDescriptons);
+*/
