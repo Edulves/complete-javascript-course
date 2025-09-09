@@ -283,9 +283,7 @@ console.log(movements);
 //   console.log(`Iteration ${i}: ${acc}`);
 //   return acc + cur;
 // }, 0);
-const balance = movements.reduce((acc, cur) => {
-  return acc + cur;
-}, 0);
+const balance = movements.reduce((acc, cur) => acc + cur, 0);
 console.log(balance);
 
 let balance2 = 0;
