@@ -81,9 +81,30 @@ const displayMovements = function (movements) {
 };
 displayMovements(account1.movements);
 
+const calcDisplaySummary = function (movement) {
+  const incomes = movement
+    .filter(mov => mov > 0)
+    .reduce((acc, cur) => acc + cur);
+  labelSumIn.textContent = `${incomes}€`;
+
+  const out = movement.filter(mov => mov < 0).reduce((acc, cur) => acc + cur);
+  labelSumOut.textContent = `${Math.abs(out)}€`;
+
+  const interest = movement
+    .filter(mov => mov > 0)
+    .map(deposits => deposits * 0.012)
+    .filter((int, _, arr) => {
+      console.log(arr);
+      return int >= 1;
+    })
+    .reduce((acc, int) => acc + int, 0);
+  labelSumInterest.textContent = `${Math.abs(interest)}€`;
+};
+calcDisplaySummary(account1.movements);
+
 const calcDisplayBalance = function (movements) {
   const balance = movements.reduce((acc, mov) => acc + mov, 0);
-  labelBalance.textContent = `${balance} EUR`;
+  labelBalance.textContent = `${balance}€`;
 };
 calcDisplayBalance(account1.movements);
 
@@ -323,6 +344,7 @@ TEST DATA 2: [16, 6, 10, 5, 6, 1, 4]
 
 GOOD LUCK 😀
 */
+/*
 const ages = [5, 2, 4, 1, 15, 8, 3];
 console.log(ages);
 const calcAverageHumanAge = function (ages) {
@@ -336,3 +358,19 @@ const calcAverageHumanAge = function (ages) {
 };
 
 calcAverageHumanAge(ages);
+*/
+
+const eurToUsd = 1.1;
+// console.log(movements);
+
+// PIPELINE
+const totalDepositsUSD = movements
+  .filter(mov => mov > 0)
+  .map((mov, _, arr) => {
+    // console.log(arr);
+    return mov * eurToUsd;
+  })
+  // .map(mov => mov * eurToUsd)
+  .reduce((acc, cur) => acc + cur, 0);
+
+// console.log(totalDepositsUSD);
