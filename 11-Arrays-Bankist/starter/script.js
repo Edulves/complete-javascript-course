@@ -387,7 +387,7 @@ TEST DATA 2: [16, 6, 10, 5, 6, 1, 4]
 
 GOOD LUCK 😀
 */
-
+/*
 const ages = [5, 2, 4, 1, 15, 8, 3];
 console.log(ages);
 const calcAverageHumanAge = ages =>
@@ -396,3 +396,20 @@ const calcAverageHumanAge = ages =>
     .filter(age => age > 17)
     .reduce((acc, cur, _, arr) => acc + cur / arr.length, 0);
 console.log(calcAverageHumanAge(ages));
+*/
+
+/*
+const firsWithDrawal = movements.find(mov => mov < 0);
+// console.log(movements);
+// console.log(firsWithDrawal);
+
+// console.log(accounts);
+const account = accounts.find(acc => acc.owner === 'Jessica Davis');
+// console.log(account);
+
+for (const acc of accounts) {
+  if (acc.owner === 'Jessica Davis') {
+    console.log(acc);
+  }
+}
+*/
