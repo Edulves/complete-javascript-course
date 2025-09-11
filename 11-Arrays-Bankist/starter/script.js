@@ -181,20 +181,25 @@ btnTransfer.addEventListener('click', function (e) {
 
 btnClose.addEventListener('click', function (e) {
   e.preventDefault();
-  console.log("Delete");
+  console.log('Delete');
 
-  if (currentAccount?.username === inputCloseUsername.value && currentAccount?.pin === Number(inputClosePin.value)){
-    const index = accounts.findIndex(acc => acc.username === currentAccount.username);
+  if (
+    currentAccount?.username === inputCloseUsername.value &&
+    currentAccount?.pin === Number(inputClosePin.value)
+  ) {
+    const index = accounts.findIndex(
+      acc => acc.username === currentAccount.username
+    );
 
     // Delete account
-    accounts.splice(index, 1)
+    accounts.splice(index, 1);
 
     // Hide UI
     containerApp.style.opacity = 0;
 
     inputCloseUsername.value = inputClosePin.value = '';
   }
-})
+});
 
 /*
 for(const nome of accounts){
@@ -216,7 +221,7 @@ for(const nome of accounts){
 //   ['GBP', 'Pound sterling'],
 // ]);
 
-// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
 /*
@@ -490,3 +495,13 @@ for (const acc of accounts) {
   }
 }
 */
+
+console.log(movements);
+const lastWithdrawal = movements.findLast(mov => mov < 0);
+console.log(lastWithdrawal);
+
+const lastestLargeMovement =
+  movements.length - movements.findLastIndex(mov => mov > 2000);
+console.log(
+  `Your lastes large movement was ${lastestLargeMovement} movements ago`
+);
