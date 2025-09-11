@@ -179,6 +179,23 @@ btnTransfer.addEventListener('click', function (e) {
   inputTransferAmount.value = inputTransferTo.value = '';
 });
 
+btnClose.addEventListener('click', function (e) {
+  e.preventDefault();
+  console.log("Delete");
+
+  if (currentAccount?.username === inputCloseUsername.value && currentAccount?.pin === Number(inputClosePin.value)){
+    const index = accounts.findIndex(acc => acc.username === currentAccount.username);
+
+    // Delete account
+    accounts.splice(index, 1)
+
+    // Hide UI
+    containerApp.style.opacity = 0;
+
+    inputCloseUsername.value = inputClosePin.value = '';
+  }
+})
+
 /*
 for(const nome of accounts){
   console.log(nome);
@@ -199,7 +216,7 @@ for(const nome of accounts){
 //   ['GBP', 'Pound sterling'],
 // ]);
 
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
 /*
