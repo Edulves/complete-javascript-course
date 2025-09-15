@@ -612,11 +612,6 @@ const breeds = [
     activities: ['running', 'agility', 'swimming'],
   },
   {
-    breed: 'Husky',
-    averageWeight: 36,
-    activities: ['running', 'agility', 'swimming'],
-  },
-  {
     breed: 'Bulldog',
     averageWeight: 36,
     activities: ['sleeping'],
@@ -629,15 +624,15 @@ const breeds = [
 ];
 
 //1.
-const huskysWeight = breeds
-  .filter(x => x.breed === 'Husky')
-  .reduce((acc, cur, _, arr) => acc + cur.averageWeight / arr.length, 0);
+const huskysWeight = breeds.find(breed => breed.breed === 'Husky').averageWeight;
+  // .filter(x => x.breed === 'Husky')
+  // .reduce((acc, cur, _, arr) => acc + cur.averageWeight / arr.length, 0);
 console.log(huskysWeight);
 
 //2.
-const dogBothActivities = breeds
-  .filter(act => act.activities.some(x => x === 'running'))
-  .filter(act => act.activities.some(x => x === 'fetch'));
+const dogBothActivities = breeds.find( breed => breed.activities.includes('fetch') && breed.activities.includes('running')).breed;
+  // .filter(act => act.activities.some(x => x === 'running'))
+  // .filter(act => act.activities.some(x => x === 'fetch'));
 console.log(dogBothActivities);
 
 //3.
@@ -649,13 +644,16 @@ const uniqueActivities = [...new Set(allActivities)];
 console.log(uniqueActivities);
 
 //5.
-const swimmingAdjacent = [
-  ...new Set(
-    breeds
-      .filter(x => x.activities.some(x => x === 'swimming'))
-      .flatMap(act => act.activities)
-  ),
-].filter(x => x !== 'swimming');
+const swimmingAdjacent = [... new Set(
+  breeds.filter(breed => breed.activities.includes('swimming')).flatMap(breed => breed.activities).filter(activity => activity !== 'swimming')
+)];
+// const swimmingAdjacent = [
+//   ...new Set(
+//     breeds
+//       .filter(x => x.activities.some(x => x === 'swimming'))
+//       .flatMap(act => act.activities)
+//   ),
+// ].filter(x => x !== 'swimming');
 console.log(swimmingAdjacent);
 
 //6.
@@ -670,5 +668,13 @@ console.log('********');
 console.log(
   breeds
     .filter(x => x.activities.some(x => x === 'fetch'))
-    .find(dog => Math.max(dog.averageWeight))
+    .find(dog => Math.max(dog.averageWeight)).averageWeight
 );
+
+const fetchWeights = breeds
+  .filter(breed => breed.activities.includes('fetch'))
+  .map(breed => breed.averageWeight);
+const heaviestFetchBreed = Math.max(...fetchWeights);
+
+console.log(fetchWeights);
+console.log(heaviestFetchBreed);
