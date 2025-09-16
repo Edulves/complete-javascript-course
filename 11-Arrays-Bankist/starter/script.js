@@ -218,9 +218,12 @@ btnClose.addEventListener('click', function (e) {
   }
 });
 
-btnSort.addEventListener('click', function(e) {
+var sorted = false;
+btnSort.addEventListener('click', function (e) {
   e.preventDefault();
-})
+  sorted = sorted ? false : true;
+  displayMovements(currentAccount.movements, sort);
+});
 
 /*
 for(const nome of accounts){
@@ -704,7 +707,7 @@ console.log(movements);
 //     return -1;
 // })
 
-movements.sort((a, b) => a - b)
+movements.sort((a, b) => a - b);
 console.log(movements);
 
 // Descending
@@ -714,5 +717,5 @@ console.log(movements);
 //   if (a < b)
 //     return 1;
 // })
-movements.sort((a, b) => b - a)
+movements.sort((a, b) => b - a);
 console.log(movements);
