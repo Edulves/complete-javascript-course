@@ -909,9 +909,7 @@ const dogs = [
 //- Formula for calculating recommended food portion: recommendedFood = weight ** 0.75 * 28. (The result is in grams of food, and the weight needs to be in kg)
 
 // 1.
-dogs.forEach(dog => {
-  dog.recFood = Math.round(dog.weight ** 0.75 * 28);
-});
+dogs.forEach(dog => (dog.recFood = Math.floor(dog.weight ** 0.75 * 28)));
 
 console.log(dogs);
 
@@ -969,40 +967,29 @@ console.log(
 );
 
 // 6.
-console.log(
-  dogs.every(
-    dog => dog.curFood > dog.recFood * 0.9 && dog.curFood < dog.recFood * 1.1
-  )
-);
+const checkEatingOkay = dog =>
+  dog.curFood > dog.recFood * 0.9 && dog.curFood < dog.recFood * 1.1;
+console.log(dogs.every(checkEatingOkay));
 
 // 7.
-const dogsEatingOkay = dogs.filter(dog => {
-  if (dog.curFood > dog.recFood * 0.9 && dog.curFood < dog.recFood * 1.1)
-    return dog;
-});
+console.log('dogsEatingOkay');
+const dogsEatingOkay = dogs.filter(checkEatingOkay);
 
 console.log(dogsEatingOkay);
 
 // 8.
 
 const groupedByEatingHabits = Object.groupBy(dogs, dog => {
-  const eatingHabit =
-    dog.curFood > dog.recFood * 1.1
-      ? 'too-much'
-      : dog.curFood < dog.recFood * 0.9
-      ? 'too-little'
-      : 'exact';
-
-  if (eatingHabit === 'too-much') return 'too-much';
-  if (eatingHabit === 'too-little') return 'too-little';
-  if (eatingHabit === 'exact') return 'exact';
+  if (dog.curFood > dog.recFood * 1.1) return 'too-much';
+  if (dog.curFood < dog.recFood * 0.9) return 'too-little';
+  return 'exact';
 });
 
 console.log(groupedByEatingHabits);
 
 // 9.
 const groupedByNumberOwners = Object.groupBy(dogs, dog => {
-  return dog.owners.length;
+  return `${dog.owners.length}-owners`;
 });
 
 console.log(groupedByNumberOwners);
