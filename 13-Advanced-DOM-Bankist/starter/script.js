@@ -35,19 +35,19 @@ document.addEventListener('keydown', function (e) {
 ////////////////////////////////
 
 // Selecting elements
-console.log(document.documentElement);
-console.log(document.head);
-console.log(document.body);
+// console.log(document.documentElement);
+// console.log(document.head);
+// console.log(document.body);
 
 const header = document.querySelector('.header');
 const allSection = document.querySelectorAll('.section');
-console.log(allSection);
+// console.log(allSection);
 
 document.getElementById('section--1');
 const allButtons = document.getElementsByTagName('button');
-console.log(allButtons);
+// console.log(allButtons);
 
-console.log(document.getElementsByClassName('btn'));
+// console.log(document.getElementsByClassName('btn'));
 
 // Creating and inserting elements
 const message = document.createElement('div');
@@ -70,3 +70,48 @@ document
     // message.remove();
     message.parentElement.removeChild(message); //Old way
   });
+
+// Styles
+message.style.backgroundColor = '#37383d';
+message.style.width = '120%';
+// message.style.padding = '10px 0';
+/*
+console.log(getComputedStyle(message).color);
+console.log(getComputedStyle(message).height);
+console.log(getComputedStyle(message).padding);
+*/
+message.style.height =
+  Number.parseFloat(getComputedStyle(message).height) + 30 + 'px';
+
+document.documentElement.style.setProperty('--color-primary', 'orangered');
+
+// Attributes
+const logo = document.querySelector('.nav__logo');
+console.log(logo.alt);
+console.log(logo.className);
+
+logo.alt = 'Beautiful minimalist logo';
+
+// Non-standard
+console.log(logo.designer);
+console.log(logo.getAttribute('designer'));
+logo.setAttribute('company', 'Bankist');
+
+console.log(logo.src);
+console.log(logo.getAttribute('src'));
+
+const link = document.querySelector('.nav__link--btn');
+console.log(link.href);
+console.log(link.getAttribute('href'));
+
+// Data attributes
+console.log(logo.dataset.versionNumber);
+
+// Classes
+logo.classList.add('c', 'j');
+logo.classList.remove('c', 'j');
+logo.classList.toggle('c');
+log.classList.contains('c');
+
+// Don't use it's gona overwrite all the classes
+logo.className = 'jonas';
