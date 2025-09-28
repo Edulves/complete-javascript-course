@@ -38,7 +38,7 @@ document.addEventListener('keydown', function (e) {
 // console.log(document.documentElement);
 // console.log(document.head);
 // console.log(document.body);
-
+/*
 const header = document.querySelector('.header');
 const allSection = document.querySelectorAll('.section');
 // console.log(allSection);
@@ -80,6 +80,7 @@ console.log(getComputedStyle(message).color);
 console.log(getComputedStyle(message).height);
 console.log(getComputedStyle(message).padding);
 */
+/*
 message.style.height =
   Number.parseFloat(getComputedStyle(message).height) + 30 + 'px';
 
@@ -115,3 +116,35 @@ log.classList.contains('c');
 
 // Don't use it's gona overwrite all the classes
 logo.className = 'jonas';
+*/
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
+
+btnScrollTo.addEventListener('click', function (e) {
+  const s1coords = section1.getBoundingClientRect();
+  console.log(s1coords);
+
+  console.log(e.target.getBoundingClientRect());
+
+  console.log('Current scroll (X/Y)', scrollX, scrollY);
+
+  console.log(
+    'height/width viewport',
+    document.documentElement.clientHeight,
+    document.documentElement.clientWidth
+  );
+
+  // Scrolling
+  // window.scrollTo(
+  //   s1coords.left + window.scrollX,
+  //   s1coords.top + window.scrollY
+  // );
+
+  // window.scrollTo({
+  //   left: s1coords.left + window.scrollX,
+  //   top: s1coords.top + window.scrollY,
+  //   behavior: 'smooth',
+  // });
+
+  section1.scrollIntoView({ behavior: 'smooth' });
+});
