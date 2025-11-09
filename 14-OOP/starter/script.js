@@ -88,7 +88,7 @@ DATA CAR 2: 'Mercedes' going at 95 km/h
 
 GOOD LUCK 😀
 */
-
+/*
 const Car = function (make, speed) {
   this.name = make;
   this.speed = speed;
@@ -119,3 +119,38 @@ Mercedes.Accelerate();
 Mercedes.Accelerate();
 Mercedes.Brake();
 Mercedes.Brake();
+*/
+
+// Class expression
+
+// class declaration
+class PersonCl {
+  constructor(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  }
+
+  // Methods will be added to .prototype propertys
+  calcAge() {
+    console.log(new Date().getFullYear() - this.birthYear);
+  }
+
+  greet = function () {
+    console.log(`Hey ${this.firstName}`);
+  };
+}
+
+const jessica = new PersonCl('Jessica', 1996);
+console.log(jessica);
+jessica.calcAge();
+
+console.log(jessica.__proto__ === PersonCl.prototype);
+
+// PersonCl.prototype.greet = function () {
+//   console.log(`Hey ${this.firstName}`);
+// };
+jessica.greet();
+
+// 1. Classes ara NOT hoisted
+// 2. Classes are first-class citizes
+// 3. Classes are executed in strict mode
