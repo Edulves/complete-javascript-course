@@ -125,8 +125,8 @@ Mercedes.Brake();
 
 // class declaration
 class PersonCl {
-  constructor(firstName, birthYear) {
-    this.firstName = firstName;
+  constructor(fullname, birthYear) {
+    this.fullname = fullname;
     this.birthYear = birthYear;
   }
 
@@ -138,11 +138,26 @@ class PersonCl {
   greet = function () {
     console.log(`Hey ${this.firstName}`);
   };
+
+  get age() {
+    return new Date().getFullYear() - this.birthYear;
+  }
+
+  // Set a property that already exists
+  set fullName(name) {
+    if (name.includes(' ')) this._fullName = name;
+    else alert(`${name} is not a full name!`);
+  }
+
+  get fullName() {
+    return this._fullName;
+  }
 }
 
-const jessica = new PersonCl('Jessica', 1996);
+const jessica = new PersonCl('Jessica Davis', 1996);
 console.log(jessica);
 jessica.calcAge();
+console.log(jessica.age);
 
 console.log(jessica.__proto__ === PersonCl.prototype);
 
@@ -154,3 +169,23 @@ jessica.greet();
 // 1. Classes ara NOT hoisted
 // 2. Classes are first-class citizes
 // 3. Classes are executed in strict mode
+
+const walter = new PersonCl('Walter', 1965);
+
+const account = {
+  owner: 'Eduardo',
+  movements: [200, 530, 120, 300],
+
+  get latest() {
+    return this.movements.slice(-1).pop();
+  },
+
+  set latest(mov) {
+    this.movements.push(mov);
+  },
+};
+
+console.log(account.latest);
+
+account.latest = 50;
+console.log(account.movements);
