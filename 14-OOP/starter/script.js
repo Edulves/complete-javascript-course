@@ -23,9 +23,14 @@ const eduardo = new Person('Eduardo', 1998);
 
 const matilda = new Person('Matilda', 2017);
 const jack = new Person('Jack', 1975);
-// console.log(matilda, jack);
 
 // console.log(eduardo instanceof Person);
+
+Person.hey = function () {
+  console.log('Hey there 🤗');
+  console.log(this);
+};
+Person.hey();
 
 // Prototypes
 // console.log(Person.prototype);
@@ -152,6 +157,12 @@ class PersonCl {
   get fullName() {
     return this._fullName;
   }
+
+  // Static methods
+  static hey() {
+    console.log('Hey there 🤗');
+    console.log(this);
+  }
 }
 
 const jessica = new PersonCl('Jessica Davis', 1996);
@@ -171,6 +182,8 @@ jessica.greet();
 // 3. Classes are executed in strict mode
 
 const walter = new PersonCl('Walter something', 1965);
+
+PersonCl.hey();
 
 const account = {
   owner: 'Eduardo',
