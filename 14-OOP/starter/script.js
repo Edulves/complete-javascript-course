@@ -126,7 +126,7 @@ Mercedes.Brake();
 // class declaration
 class PersonCl {
   constructor(fullname, birthYear) {
-    this.fullname = fullname;
+    this.fullName = fullname;
     this.birthYear = birthYear;
   }
 
@@ -170,7 +170,7 @@ jessica.greet();
 // 2. Classes are first-class citizes
 // 3. Classes are executed in strict mode
 
-const walter = new PersonCl('Walter', 1965);
+const walter = new PersonCl('Walter something', 1965);
 
 const account = {
   owner: 'Eduardo',
