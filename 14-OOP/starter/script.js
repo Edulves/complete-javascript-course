@@ -504,14 +504,17 @@ class Account {
   // Public interface (API)
   getMovements() {
     return this.#movements;
+    // Not chaninable
   }
 
   deposit(val) {
     this.#movements.push(val);
+    return this;
   }
 
   withdraw(val) {
     this.deposit(-val);
+    return this;
   }
 
   #approveLoan(val) {
@@ -520,22 +523,30 @@ class Account {
   }
 
   requestLoan(val) {
-    if (this.approveLoan(val)) {
+    if (this.#approveLoan(val)) {
       this.deposit(val);
       console.log(`Loan approved`);
     }
+    return this;
   }
 
-  static test() {
-    console.log(`Hello World!!!`);
-  }
+  //   static test() {
+  //     console.log(`Hello World!!!`);
+  //   }
 }
 
 const acc1 = new Account('Eduardo', 'EUR', 1111);
-acc1.deposit(300);
-acc1.withdraw(100);
-acc1.movements = [];
+// acc1.deposit(300);
+// acc1.withdraw(100);
+const movements = acc1
+  .deposit(300)
+  .withdraw(100)
+  .withdraw(50)
+  .requestLoan(25000)
+  .withdraw(4000)
+  .getMovements();
+
 console.log(acc1);
 // console.log(acc1.#movements);
-// acc1.#approveLoan(100);
-Account.test();
+// Account.test();
+console.log(movements);
