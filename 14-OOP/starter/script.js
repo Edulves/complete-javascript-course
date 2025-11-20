@@ -484,69 +484,151 @@ jay.calcAge();
 // 4) Private methods
 // STATIC version of these 4
 
-class Account {
-  locale = navigator.language;
-  bank = 'Bankist';
-  #movements = [];
-  #pin;
+// class Account {
+//   locale = navigator.language;
+//   bank = 'Bankist';
+//   #movements = [];
+//   #pin;
 
-  constructor(owner, currency, pin) {
-    this.owner = owner;
-    this.currency = currency;
-    this.#pin = pin;
+//   constructor(owner, currency, pin) {
+//     this.owner = owner;
+//     this.currency = currency;
+//     this.#pin = pin;
 
-    // this.movements = [];
-    // this.locale = navigator.language;
+//     // this.movements = [];
+//     // this.locale = navigator.language;
 
-    console.log(`Thanks for opening an account, ${owner}`);
+//     console.log(`Thanks for opening an account, ${owner}`);
+//   }
+
+//   // Public interface (API)
+//   getMovements() {
+//     return this.#movements;
+//     // Not chaninable
+//   }
+
+//   deposit(val) {
+//     this.#movements.push(val);
+//     return this;
+//   }
+
+//   withdraw(val) {
+//     this.deposit(-val);
+//     return this;
+//   }
+
+//   #approveLoan(val) {
+//     // Fake method
+//     return true;
+//   }
+
+//   requestLoan(val) {
+//     if (this.#approveLoan(val)) {
+//       this.deposit(val);
+//       console.log(`Loan approved`);
+//     }
+//     return this;
+//   }
+
+//   //   static test() {
+//   //     console.log(`Hello World!!!`);
+//   //   }
+// }
+
+// const acc1 = new Account('Eduardo', 'EUR', 1111);
+// // acc1.deposit(300);
+// // acc1.withdraw(100);
+// const movements = acc1
+//   .deposit(300)
+//   .withdraw(100)
+//   .withdraw(50)
+//   .requestLoan(25000)
+//   .withdraw(4000)
+//   .getMovements();
+
+// console.log(acc1);
+// // console.log(acc1.#movements);
+// // Account.test();
+// console.log(movements);
+
+///////////////////////////////////////
+// Coding Challenge #4
+
+/* 
+1. Re-create challenge #3, but this time using ES6 classes: create an 'EVCl' child class of the 'CarCl' class
+2. Make the 'charge' property private;
+3. Implement the ability to chain the 'accelerate' and 'chargeBattery' methods of this class, and also update the 'brake' method in the 'CarCl' class. They experiment with chining!
+
+DATA CAR 1: 'Rivian' going at 120 km/h, with a charge of 23%
+
+GOOD LUCK 😀
+*/
+
+const Car = function (make, speed) {
+  this.make = make;
+  this.speed = speed;
+};
+
+class CarCl {
+  constructor(make, speed) {
+    this.make = make;
+    this.speed = speed;
   }
 
-  // Public interface (API)
-  getMovements() {
-    return this.#movements;
-    // Not chaninable
+  accelerate() {
+    this.speed += 10;
+    console.log(`${this.make} is going at ${this.speed} km/h`);
   }
 
-  deposit(val) {
-    this.#movements.push(val);
+  brake() {
+    this.speed -= 5;
+    console.log(`${this.make} is going at ${this.speed} km/h`);
     return this;
   }
 
-  withdraw(val) {
-    this.deposit(-val);
-    return this;
+  get speedUS() {
+    return this.speed / 1.6;
   }
 
-  #approveLoan(val) {
-    // Fake method
-    return true;
+  set speedUS(speed) {
+    this.speed = speed * 1.6;
   }
-
-  requestLoan(val) {
-    if (this.#approveLoan(val)) {
-      this.deposit(val);
-      console.log(`Loan approved`);
-    }
-    return this;
-  }
-
-  //   static test() {
-  //     console.log(`Hello World!!!`);
-  //   }
 }
 
-const acc1 = new Account('Eduardo', 'EUR', 1111);
-// acc1.deposit(300);
-// acc1.withdraw(100);
-const movements = acc1
-  .deposit(300)
-  .withdraw(100)
-  .withdraw(50)
-  .requestLoan(25000)
-  .withdraw(4000)
-  .getMovements();
+class EVCl extends CarCl {
+  #charge;
 
-console.log(acc1);
-// console.log(acc1.#movements);
-// Account.test();
-console.log(movements);
+  constructor(make, speed, charge) {
+    super(make, speed);
+    this.#charge = charge;
+    return this;
+  }
+
+  accelerate() {
+    this.speed += 20;
+    this.#charge--;
+    console.log(
+      `${this.make} is going at ${this.speed} km/h, with a charge of ${
+        this.#charge
+      }`
+    );
+    return this;
+  }
+
+  ChargeBattery(chargeTo) {
+    this.#charge = chargeTo;
+    return this;
+  }
+}
+
+const rivian = new EVCl('Rivian', 120, 23);
+console.log(rivian);
+rivian
+  .accelerate()
+  .accelerate()
+  .accelerate()
+  .brake()
+  .ChargeBattery(50)
+  .accelerate();
+
+console.log(rivian.speedUS);
