@@ -285,4 +285,32 @@ const whereAmI = async function () {
     });
 };
 
-btn.addEventListener('click', whereAmI);
+// btn.addEventListener('click', whereAmI);
+const imgs = document.querySelector('.images');
+
+const wait = function (seconds) {
+  return new Promise(resolve => {
+    setTimeout(resolve, seconds * 1000);
+  });
+};
+
+const createImage = async function (imgPath) {
+  return new Promise(function (resolve, reject) {
+    const createImg = document.createElement('img');
+    createImg.src = imgPath;
+    resolve(createImg);
+  }).then(img => {
+    imgs.appendChild(img);
+    return imgs;
+  });
+};
+
+const showImgs = async function () {
+  for (let i = 1; i <= 3; i++) {
+    createImage(`img/img-${i}.jpg`);
+    await wait(2);
+    imgs.innerHTML = '';
+  }
+};
+
+showImgs();
