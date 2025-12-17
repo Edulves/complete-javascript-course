@@ -408,7 +408,7 @@ const whereAmI = async function (country) {
     throw err;
   }
 };
-console.log('1: Will get location');
+// console.log('1: Will get location');
 // const city = whereAmI();
 // console.log(city);
 
@@ -417,12 +417,32 @@ console.log('1: Will get location');
 //   .catch(err => console.error(`2: ${err.message}`))
 //   .finally(() => console.log('3: Finished getting location'));
 
-(async function () {
+// (async function () {
+//   try {
+//     const response = await whereAmI();
+//     console.log(`2: ${response}`);
+//   } catch (error) {
+//     console.error(error);
+//   }
+//   console.log('3: Finished getting location');
+// })();
+
+const get3Countries = async function (c1, c2, c3) {
   try {
-    const response = await whereAmI();
-    console.log(`2: ${response}`);
+    // const [data1] = await getJSON(`https://restcountries.com/v3.1/name/${c1}`);
+    // const [data2] = await getJSON(`https://restcountries.com/v3.1/name/${c2}`);
+    // const [data3] = await getJSON(`https://restcountries.com/v3.1/name/${c3}`);
+
+    const data = await Promise.all([
+      getJSON(`https://restcountries.com/v3.1/name/${c1}`),
+      getJSON(`https://restcountries.com/v3.1/name/${c2}`),
+      getJSON(`https://restcountries.com/v3.1/name/${c3}`),
+    ]);
+
+    data.map(res => console.log(res[0].capital));
   } catch (error) {
     console.error(error);
   }
-  console.log('3: Finished getting location');
-})();
+};
+
+get3Countries('portugal', 'brasil', 'usa');
