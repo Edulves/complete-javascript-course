@@ -411,7 +411,7 @@ const wait = function (seconds) {
   });
 };
 
-const imgContainer = document.querySelector('.images');
+const c = document.querySelector('.images');
 
 const createImage = function (imgPath) {
   return new Promise(function (resolve, reject) {
