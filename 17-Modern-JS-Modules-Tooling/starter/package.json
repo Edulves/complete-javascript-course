@@ -5,12 +5,18 @@
   "license": "ISC",
   "author": "Eduardo",
   "type": "commonjs",
-  "main": "clean.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
   },
   "dependencies": {
     "leaflet": "^1.9.4",
     "lodash-es": "^4.17.22"
+  },
+  "devDependencies": {
+    "parcel": "^2.16.3"
   }
 }

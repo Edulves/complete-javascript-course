@@ -110,3 +110,6 @@ state.user.loggedIn = false;
 console.log(stateClone);
 
 console.log(stateDeepClone);
+
+console.log('teste');
+console.log('teste 2');
